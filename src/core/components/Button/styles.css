@@ -1,0 +1,20 @@
+.btn-component {
+  width: 100px;
+  height: 40px;
+  background: #1890ff;
+  border-radius: 4px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #ffffff;
+
+  outline: none;
+  border: none;
+}
