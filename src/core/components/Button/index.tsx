@@ -3,7 +3,6 @@ import "./styles.css";
 
 type Props = {
   title: string;
-  onClick?: () => any;
 };
 
 const Button = ({ title }: Props) => {

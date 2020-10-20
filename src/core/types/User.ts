@@ -1,4 +1,5 @@
 export type User = {
+  login: string;
   company: string;
   blog: string;
   location: string;
