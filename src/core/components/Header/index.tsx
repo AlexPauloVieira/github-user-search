@@ -4,11 +4,9 @@ import "./styles.css";
 
 const Header = () => (
   <nav className='navbar'>
-    <header className='header'>
-      <Link to='/'>
-        <h1 className='title'>Bootcamp DevSuperior</h1>
-      </Link>
-    </header>
+    <Link to='/'>
+      <h1 className='title'>Bootcamp DevSuperior</h1>
+    </Link>
   </nav>
 );
 

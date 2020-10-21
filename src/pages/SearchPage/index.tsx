@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "core/components/Button";
 import dayjs from "dayjs";
 import Header from "core/components/Header";
@@ -12,23 +12,25 @@ const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [user, setUser] = useState<User>();
-  const [usuario, setUsuario] = useState(user?.login);
-
-  useEffect(() => {
-    setIsLoading(true);
-    makeRequest({ url: `/${usuario}` })
-      .then((response) => setUser(response.data))
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [usuario]);
+  const [userName, setUserName] = useState(user?.login);
 
   function handleOnChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setUsuario(event.target.value);
+    setUserName(event.target.value);
   }
 
   function handleOnClick() {
     setIsClicked(true);
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setIsLoading(true);
+    makeRequest({ url: `/${userName}` })
+      .then((response) => setUser(response.data))
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   const date = dayjs(user?.created_at).format("DD/MM/YYYY");
@@ -37,17 +39,19 @@ const SearchPage = () => {
     <>
       <Header />
       <div className='search-container'>
-        <h1 className='search-text'>Encontre um perfil Github</h1>
-        <input
-          type='text'
-          placeholder='Usuário Github'
-          className='search-input'
-          value={usuario}
-          onChange={handleOnChange}
-        />
-        <div className='btn-search-container'>
-          <Button title='Encontrar' onClick={handleOnClick} />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <h1 className='search-text'>Encontre um perfil Github</h1>
+          <input
+            type='text'
+            placeholder='Usuário Github'
+            className='search-input'
+            value={userName}
+            onChange={handleOnChange}
+          />
+          <div className='btn-search-container'>
+            <Button title='Encontrar' onClick={handleOnClick} />
+          </div>
+        </form>
       </div>
 
       {isClicked && (
@@ -69,7 +73,7 @@ const SearchPage = () => {
                   <a
                     target='_blank'
                     rel='noopener noreferrer'
-                    href={`https://github.com/${usuario}`}
+                    href={`https://github.com/${userName}`}
                   >
                     <Button title='Ver Perfil' />
                   </a>
